@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HCI & Data Visualization Studio - Praktikum Informatika</title>
+
+   
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+   
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="theme-good">
+
+    
+    <header class="app-header">
+        <div class="header-left">
+            <h1>📊 HCI & Data Visualization Studio</h1>
+            <p>Implementasi Kuliah Tamu: <em>Arafat Febriandirza (BRIN)</em> — Informatika UNIB</p>
+        </div>
+        
+        
+        <div class="header-right">
+            <button id="btnToggleUI" class="btn-toggle" onclick="toggleModeUI()">
+                🔄 Coba Mode: Desain Buruk (Bad UI)
+            </button>
+        </div>
+    </header>
+
+    <!-- Banner Edukasi Prinsip Desain HCI -->
+    <section id="bannerPrinsip" class="banner-prinsip">
+        <p><strong>💡 Prinsip Desain Terpasang:</strong> 
+        Mantra Shneiderman (<em>Overview first, filter, details-on-demand</em>) | 
+        Data-Ink Ratio Edward Tufte | 
+        Psikologi Kognitif (Memori kerja otak manusia terbatas ~7 item).
+        </p>
+    </section>
+
+    <!-- Kontainer Utama Aplikasi -->
+    <div class="main-wrapper">
+        
+        <!-- BAGIAN 1: OVERVIEW FIRST (Ringkasan Data Awal) -->
+        <section class="section-card">
+            <h2 class="section-title">1. Overview First (Ringkasan Tingkat Tinggi)</h2>
+            <div class="overview-grid">
+                <div class="kpi-card">
+                    <span class="kpi-title">Total Proyek Riset</span>
+                    <span id="kpiTotal" class="kpi-value">0</span>
+                    <span class="kpi-desc">Tercatat di Sistem</span>
+                </div>
+                <div class="kpi-card">
+                    <span class="kpi-title">Total Sitasi Ilmiah</span>
+                    <span id="kpiSitasi" class="kpi-value">0</span>
+                    <span class="kpi-desc">Dampak Akademik</span>
+                </div>
+                <div class="kpi-card">
+                    <span class="kpi-title">Status Normal (Optimal)</span>
+                    <span id="kpiNormal" class="kpi-value text-green">0</span>
+                    <span class="kpi-desc">Sesuai Target</span>
+                </div>
+                <div class="kpi-card">
+                    <span class="kpi-title">Status Anomali (Perhatian)</span>
+                    <span id="kpiAnomali" class="kpi-value text-red">0</span>
+                    <span class="kpi-desc">Warna merah hanya untuk anomali</span>
+                </div>
+            </div>
+        </section>
+
+       
+        <section class="section-card">
+            <div class="filter-header">
+                <div>
+                    <h2 class="section-title">2. Zoom & Filter (Eksplorasi Data)</h2>
+                    <p class="filter-subtitle">Pilih bidang penelitian untuk memfilter grafik & daftar data:</p>
+                </div>
+                
+                <!-- Tombol-tombol Filter -->
+                <div class="filter-group">
+                    <button class="btn-pill active" onclick="filterData('Semua')">Semua Bidang</button>
+                    <button class="btn-pill" onclick="filterData('Teknologi Informasi')">💻 Informatika & AI</button>
+                    <button class="btn-pill" onclick="filterData('Energi Terbarukan')">⚡ Energi Terbarukan</button>
+                    <button class="btn-pill" onclick="filterData('Kesehatan Hayati')">🧬 Kesehatan & Hayati</button>
+                </div>
+            </div>
+
+            <!-- Tampilan Grafik Visualisasi Data -->
+            <div class="charts-grid">
+                <div class="chart-box">
+                    <h3>📊 Bar Chart: Perbandingan Jumlah Proyek per Bidang</h3>
+                    <div class="canvas-container">
+                        <canvas id="barChart"></canvas>
+                    </div>
+                </div>
+                <div class="chart-box">
+                    <h3>📈 Line Chart: Tren Publikasi Riset 5 Tahun Terakhir</h3>
+                    <div class="canvas-container">
+                        <canvas id="lineChart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- BAGIAN 3: DETAILS-ON-DEMAND (Rincian Saat Dibutuhkan) -->
+        <section class="section-card">
+            <h2 class="section-title">3. Details-on-Demand (Rincian Data Saat Dipilih)</h2>
+            <p class="filter-subtitle">Klik salah satu baris riset di bawah untuk memunculkan detail lengkap (Mencegah beban ingatan / <em>recognition over recall</em>):</p>
+            
+            <div class="details-wrapper">
+                <!-- Tabel Daftar Ringkas -->
+                <div class="table-container">
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>Judul Proyek Riset</th>
+                                <th>Bidang</th>
+                                <th>Tahun</th>
+                                <th>Status</th>
+                                <th>Aksi</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tableBody">
+                           
+                        </tbody>
+                    </table>
+                </div>
+
+               
+                <div id="detailPanel" class="detail-display">
+                    <h3 id="detJudul">Pilih salah satu riset</h3>
+                    <div id="detContent" class="detail-info">
+                        <p class="text-muted">Klik tombol "Lihat Detail" pada tabel di sebelah kiri untuk melihat informasi lengkap peneliti, abstrak, dan jumlah sitasi.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </div>
+
+    
+    <script src="app.js"></script>
+</body>
+</html>
